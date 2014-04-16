@@ -38,33 +38,10 @@ public class Portal {
 	}
 
 	/**
-	 * @return the name
+	 * @return the bungeeTarget
 	 */
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the type
-	 */
-	public PortalType getType() {
-		return this.type;
-	}
-
-	/**
-	 * @param type
-	 *            the type to set
-	 */
-	public void setType(PortalType type) {
-		this.type = type;
+	public String getBungeeTarget() {
+		return this.bungeeTarget;
 	}
 
 	/**
@@ -75,18 +52,31 @@ public class Portal {
 	}
 
 	/**
-	 * @param command
-	 *            the command to set
+	 * @return the coords
 	 */
-	public void setCommand(String command) {
-		this.command = command;
+	public ArrayList<String> getCoords() {
+		return this.coords;
 	}
 
 	/**
-	 * @return the bungeeTarget
+	 * @return the locationTarget
 	 */
-	public String getBungeeTarget() {
-		return this.bungeeTarget;
+	public String getLocationTarget() {
+		return this.locationTarget;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return this.name;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public PortalType getType() {
+		return this.type;
 	}
 
 	/**
@@ -98,10 +88,11 @@ public class Portal {
 	}
 
 	/**
-	 * @return the coords
+	 * @param command
+	 *            the command to set
 	 */
-	public ArrayList<String> getCoords() {
-		return this.coords;
+	public void setCommand(String command) {
+		this.command = command;
 	}
 
 	/**
@@ -113,17 +104,26 @@ public class Portal {
 	}
 
 	/**
-	 * @return the locationTarget
-	 */
-	public String getLocationTarget() {
-		return this.locationTarget;
-	}
-
-	/**
 	 * @param locationTarget
 	 *            the locationTarget to set
 	 */
 	public void setLocationTarget(String locationTarget) {
 		this.locationTarget = locationTarget;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @param type
+	 *            the type to set
+	 */
+	public void setType(PortalType type) {
+		this.type = type;
 	}
 }

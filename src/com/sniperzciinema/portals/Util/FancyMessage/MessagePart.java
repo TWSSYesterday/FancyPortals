@@ -27,9 +27,9 @@ final class MessagePart {
 			if (this.styles != null)
 				for (final ChatColor style : this.styles)
 					json.name(style.name().toLowerCase()).value(true);
-			if (this.clickActionName != null && this.clickActionData != null)
+			if ((this.clickActionName != null) && (this.clickActionData != null))
 				json.name("clickEvent").beginObject().name("action").value(this.clickActionName).name("value").value(this.clickActionData).endObject();
-			if (this.hoverActionName != null && this.hoverActionData != null)
+			if ((this.hoverActionName != null) && (this.hoverActionData != null))
 				json.name("hoverEvent").beginObject().name("action").value(this.hoverActionName).name("value").value(this.hoverActionData).endObject();
 			return json.endObject();
 		}

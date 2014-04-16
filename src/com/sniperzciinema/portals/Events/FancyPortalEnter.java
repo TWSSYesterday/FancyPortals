@@ -11,9 +11,15 @@ import com.sniperzciinema.portals.Portals.Portal;
 
 public class FancyPortalEnter extends Event implements Cancellable {
 
-	private boolean	cancelled	= false;
-	private Portal	portal;
-	private Player	player;
+	private boolean						cancelled	= false;
+	private Portal						portal;
+	private Player						player;
+
+	private static final HandlerList	handlers	= new HandlerList();
+
+	public static HandlerList getHandlerList() {
+		return FancyPortalEnter.handlers;
+	}
 
 	public FancyPortalEnter(Portal portal, Player player)
 	{
@@ -21,15 +27,23 @@ public class FancyPortalEnter extends Event implements Cancellable {
 		setPlayer(player);
 	}
 
-	private static final HandlerList	handlers	= new HandlerList();
-
 	@Override
 	public HandlerList getHandlers() {
 		return FancyPortalEnter.handlers;
 	}
 
-	public static HandlerList getHandlerList() {
-		return FancyPortalEnter.handlers;
+	/**
+	 * @return the player
+	 */
+	public Player getPlayer() {
+		return this.player;
+	}
+
+	/**
+	 * @return the portal
+	 */
+	public Portal getPortal() {
+		return this.portal;
 	}
 
 	/**
@@ -50,10 +64,11 @@ public class FancyPortalEnter extends Event implements Cancellable {
 	}
 
 	/**
-	 * @return the portal
+	 * @param player
+	 *            the player to set
 	 */
-	public Portal getPortal() {
-		return this.portal;
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	/**
@@ -62,20 +77,5 @@ public class FancyPortalEnter extends Event implements Cancellable {
 	 */
 	public void setPortal(Portal portal) {
 		this.portal = portal;
-	}
-
-	/**
-	 * @return the player
-	 */
-	public Player getPlayer() {
-		return this.player;
-	}
-
-	/**
-	 * @param player
-	 *            the player to set
-	 */
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 }

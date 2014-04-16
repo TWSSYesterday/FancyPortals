@@ -40,22 +40,57 @@ public class PortalHandler {
 
 	}
 
-	public void savePortal(Portal portal) {
-		String portalName = portal.getName();
-		String bungeeTarget = portal.getBungeeTarget();
-		String command = portal.getCommand();
-		List<String> coords = portal.getCoords();
-		String target = portal.getLocationTarget();
-		PortalType type = portal.getType();
+	/**
+	 * Create a portal using bungee
+	 * 
+	 * @param name
+	 * @param type
+	 * @param blocks
+	 * @param bungeeTarget
+	 * @throws NotValidCoord
+	 */
+	public void createPortal(String name, PortalType type, ArrayList<String> coords, String arg) {
 
-		this.fileManager.getPortals().set("Portals." + portalName, portalName);
-		this.fileManager.getPortals().set("Portals." + portalName + ".Bungee Target", bungeeTarget);
-		this.fileManager.getPortals().set("Portals." + portalName + ".Command", command);
-		this.fileManager.getPortals().set("Portals." + portalName + ".Coords", coords);
-		this.fileManager.getPortals().set("Portals." + portalName + ".Target", target);
-		this.fileManager.getPortals().set("Portals." + portalName + ".Type", type.toString());
+		Portal portal = new Portal(name, type, coords, arg);
+		this.portals.add(portal);
+		savePortal(portal);
 
-		this.fileManager.savePortals();
+	}
+
+	public ArrayList<String> getAdjacentBlocks(Location loc) {
+		BlockCrawler blockSpider = new BlockCrawler(50);
+		ArrayList<String> blockArray = new ArrayList<String>();
+		blockSpider.start(loc.getBlock(), blockArray);
+		return blockArray;
+	}
+
+	public Portal getPortal(Location location) {
+		for (Portal portal : this.portals)
+			if (portal.getCoords().contains(new Coords(location).asStringIgnoreYawAndPitch()))
+				return portal;
+		return null;
+	}
+
+	/**
+	 * Get the portal
+	 * 
+	 * @param name
+	 * @return the portal or null if it doesn't exist
+	 */
+	public Portal getPortal(String name) {
+		for (Portal portal : this.portals)
+			if (portal.getName().equalsIgnoreCase(name))
+				return portal;
+		return null;
+	}
+
+	public ArrayList<Portal> getPortals() {
+		return this.portals;
+	}
+
+	public boolean hasPortals() {
+
+		return !this.portals.isEmpty();
 	}
 
 	/**
@@ -81,23 +116,6 @@ public class PortalHandler {
 	}
 
 	/**
-	 * Create a portal using bungee
-	 * 
-	 * @param name
-	 * @param type
-	 * @param blocks
-	 * @param bungeeTarget
-	 * @throws NotValidCoord
-	 */
-	public void createPortal(String name, PortalType type, ArrayList<String> coords, String arg) {
-
-		Portal portal = new Portal(name, type, coords, arg);
-		this.portals.add(portal);
-		savePortal(portal);
-
-	}
-
-	/**
 	 * Remove a portal
 	 * 
 	 * @param portal
@@ -109,39 +127,21 @@ public class PortalHandler {
 		this.plugin.saveConfig();
 	}
 
-	/**
-	 * Get the portal
-	 * 
-	 * @param name
-	 * @return the portal or null if it doesn't exist
-	 */
-	public Portal getPortal(String name) {
-		for (Portal portal : this.portals)
-			if (portal.getName().equalsIgnoreCase(name))
-				return portal;
-		return null;
-	}
+	public void savePortal(Portal portal) {
+		String portalName = portal.getName();
+		String bungeeTarget = portal.getBungeeTarget();
+		String command = portal.getCommand();
+		List<String> coords = portal.getCoords();
+		String target = portal.getLocationTarget();
+		PortalType type = portal.getType();
 
-	public Portal getPortal(Location location) {
-		for (Portal portal : this.portals)
-			if (portal.getCoords().contains(new Coords(location).asStringIgnoreYawAndPitch()))
-				return portal;
-		return null;
-	}
+		this.fileManager.getPortals().set("Portals." + portalName, portalName);
+		this.fileManager.getPortals().set("Portals." + portalName + ".Bungee Target", bungeeTarget);
+		this.fileManager.getPortals().set("Portals." + portalName + ".Command", command);
+		this.fileManager.getPortals().set("Portals." + portalName + ".Coords", coords);
+		this.fileManager.getPortals().set("Portals." + portalName + ".Target", target);
+		this.fileManager.getPortals().set("Portals." + portalName + ".Type", type.toString());
 
-	public boolean hasPortals() {
-
-		return !this.portals.isEmpty();
-	}
-
-	public ArrayList<Portal> getPortals() {
-		return this.portals;
-	}
-
-	public ArrayList<String> getAdjacentBlocks(Location loc) {
-		BlockCrawler blockSpider = new BlockCrawler(50);
-		ArrayList<String> blockArray = new ArrayList<String>();
-		blockSpider.start(loc.getBlock(), blockArray);
-		return blockArray;
+		this.fileManager.savePortals();
 	}
 }

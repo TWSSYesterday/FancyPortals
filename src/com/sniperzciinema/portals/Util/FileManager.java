@@ -29,8 +29,13 @@ public class FileManager {
 		return this.plugin.getConfig();
 	}
 
-	public void saveConfig() {
-		this.plugin.saveConfig();
+	public FileConfiguration getPortals() {
+		if (this.portals == null)
+		{
+			reloadPortals();
+			savePortals();
+		}
+		return this.portals;
 	}
 
 	public void reloadConfig() {
@@ -47,22 +52,17 @@ public class FileManager {
 		if (defConfigStream != null)
 		{
 			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-			if (!this.portalsFile.exists() || this.portalsFile.length() == 0)
+			if (!this.portalsFile.exists() || (this.portalsFile.length() == 0))
 				this.portals.setDefaults(defConfig);
 		}
 	}
 
-	public FileConfiguration getPortals() {
-		if (this.portals == null)
-		{
-			reloadPortals();
-			savePortals();
-		}
-		return this.portals;
+	public void saveConfig() {
+		this.plugin.saveConfig();
 	}
 
 	public void savePortals() {
-		if (this.portals == null || this.portalsFile == null)
+		if ((this.portals == null) || (this.portalsFile == null))
 			return;
 		try
 		{

@@ -23,14 +23,8 @@ public class BlockCrawler {
 		this.mMaxPortalSize = maxPortalSize;
 	}
 
-	public void start(Block origBlock, ArrayList<String> blockCoordsArr) {
-		this.mOrigBlock = origBlock;
-		this.mProcessedBlocks = blockCoordsArr;
-		processAdjacent(this.mOrigBlock, this.mOrigBlock.getType());
-	}
-
 	private void processAdjacent(Block block, Material type) {
-		if (block != null && block.getType() == type)
+		if ((block != null) && (block.getType() == type))
 			if (!this.mProcessedBlocks.contains(new Coords(block.getLocation()).asStringIgnoreYawAndPitch()))
 			{
 				this.mProcessedBlocks.add(new Coords(block.getLocation()).asStringIgnoreYawAndPitch());
@@ -44,6 +38,12 @@ public class BlockCrawler {
 						processAdjacent(nextLoc.getBlock(), block.getType());
 				}
 			}
+	}
+
+	public void start(Block origBlock, ArrayList<String> blockCoordsArr) {
+		this.mOrigBlock = origBlock;
+		this.mProcessedBlocks = blockCoordsArr;
+		processAdjacent(this.mOrigBlock, this.mOrigBlock.getType());
 	}
 
 }

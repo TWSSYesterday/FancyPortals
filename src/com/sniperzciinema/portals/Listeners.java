@@ -39,6 +39,17 @@ public class Listeners implements Listener {
 		this.seconds = 1;
 	}
 
+	public void activateCooldown(Player player) {
+		this.cooldowns.put(player.getName(), System.currentTimeMillis());
+	}
+
+	public boolean isCooledDown(Player player) {
+		if (!this.cooldowns.containsKey(player.getName()) || (((System.currentTimeMillis() - this.cooldowns.get(player.getName())) / 1000) >= this.seconds))
+			return true;
+		else
+			return false;
+	}
+
 	@EventHandler
 	public void onBlockPhysicsEvent(BlockPhysicsEvent e) {
 		if (e.getBlock().getType() == Material.PORTAL)
@@ -47,7 +58,7 @@ public class Listeners implements Listener {
 
 	@EventHandler
 	public void onPlayerMoveEvent(PlayerMoveEvent e) {
-		boolean isSameBlock = e.getFrom().getBlockX() == e.getTo().getBlockX() && e.getFrom().getBlockY() == e.getTo().getBlockY() && e.getFrom().getBlockZ() == e.getTo().getBlockZ();
+		boolean isSameBlock = (e.getFrom().getBlockX() == e.getTo().getBlockX()) && (e.getFrom().getBlockY() == e.getTo().getBlockY()) && (e.getFrom().getBlockZ() == e.getTo().getBlockZ());
 		if (!isSameBlock)
 		{
 			Player player = e.getPlayer();
@@ -104,17 +115,6 @@ public class Listeners implements Listener {
 					else
 						player.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Invalid Permissions!");
 		}
-	}
-
-	public boolean isCooledDown(Player player) {
-		if (!this.cooldowns.containsKey(player.getName()) || (System.currentTimeMillis() - this.cooldowns.get(player.getName())) / 1000 >= this.seconds)
-			return true;
-		else
-			return false;
-	}
-
-	public void activateCooldown(Player player) {
-		this.cooldowns.put(player.getName(), System.currentTimeMillis());
 	}
 
 }

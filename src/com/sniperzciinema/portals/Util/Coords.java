@@ -13,22 +13,6 @@ public class Coords {
 	private int		x, y, z;
 	private float	pitch, yaw;
 
-	public Coords(World world, int x, int y, int z, float yaw, float pitch)
-	{
-		setWorld(world);
-		setX(x);
-		setY(y);
-		setZ(z);
-	}
-
-	public Coords(World world, int x, int y, int z)
-	{
-		setWorld(world);
-		setX(x);
-		setY(y);
-		setZ(z);
-	}
-
 	public Coords(Location loc)
 	{
 		setWorld(loc.getWorld());
@@ -52,6 +36,22 @@ public class Coords {
 			setYaw(Float.parseFloat(list[4]));
 			setPitch(Float.parseFloat(list[5]));
 		}
+	}
+
+	public Coords(World world, int x, int y, int z)
+	{
+		setWorld(world);
+		setX(x);
+		setY(y);
+		setZ(z);
+	}
+
+	public Coords(World world, int x, int y, int z, float yaw, float pitch)
+	{
+		setWorld(world);
+		setX(x);
+		setY(y);
+		setZ(z);
 	}
 
 	/**
@@ -84,18 +84,17 @@ public class Coords {
 	}
 
 	/**
+	 * @return the pitch
+	 */
+	public float getPitch() {
+		return this.pitch;
+	}
+
+	/**
 	 * @return the world
 	 */
 	public String getWorld() {
 		return this.world;
-	}
-
-	/**
-	 * @param world
-	 *            the world to set
-	 */
-	public void setWorld(World world) {
-		this.world = world.getName();
 	}
 
 	/**
@@ -106,14 +105,6 @@ public class Coords {
 	}
 
 	/**
-	 * @param x
-	 *            the x to set
-	 */
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	/**
 	 * @return the y
 	 */
 	public int getY() {
@@ -121,11 +112,10 @@ public class Coords {
 	}
 
 	/**
-	 * @param y
-	 *            the y to set
+	 * @return the yaw
 	 */
-	public void setY(int y) {
-		this.y = y;
+	public float getYaw() {
+		return this.yaw;
 	}
 
 	/**
@@ -133,21 +123,6 @@ public class Coords {
 	 */
 	public int getZ() {
 		return this.z;
-	}
-
-	/**
-	 * @param z
-	 *            the z to set
-	 */
-	public void setZ(int z) {
-		this.z = z;
-	}
-
-	/**
-	 * @return the pitch
-	 */
-	public float getPitch() {
-		return this.pitch;
 	}
 
 	/**
@@ -159,10 +134,27 @@ public class Coords {
 	}
 
 	/**
-	 * @return the yaw
+	 * @param world
+	 *            the world to set
 	 */
-	public float getYaw() {
-		return this.yaw;
+	public void setWorld(World world) {
+		this.world = world.getName();
+	}
+
+	/**
+	 * @param x
+	 *            the x to set
+	 */
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	/**
+	 * @param y
+	 *            the y to set
+	 */
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	/**
@@ -171,6 +163,14 @@ public class Coords {
 	 */
 	public void setYaw(float yaw) {
 		this.yaw = yaw;
+	}
+
+	/**
+	 * @param z
+	 *            the z to set
+	 */
+	public void setZ(int z) {
+		this.z = z;
 	}
 
 }

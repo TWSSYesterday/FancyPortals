@@ -26,19 +26,16 @@ public class FancyPortals extends JavaPlugin {
 	private FileManager		fileManager;
 	private Logger			logger;
 
-	@Override
-	public void onEnable() {
-		this.logger = getLogger();
-		this.fileManager = new FileManager(this);
-		this.portalHandler = new PortalHandler(this, this.fileManager, this.logger);
-		// Register the event listener
-		getServer().getPluginManager().registerEvents(new Listeners(this, this.portalHandler), this);
-
-		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+	public Logger getConsoleLogger() {
+		return this.logger;
 	}
 
-	@Override
-	public void onDisable() {
+	public FileManager getFileManager() {
+		return this.fileManager;
+	}
+
+	public PortalHandler getPortalHandler() {
+		return this.portalHandler;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -53,7 +50,7 @@ public class FancyPortals extends JavaPlugin {
 				sender.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "Invalid Permissions!");
 				return true;
 			}
-			if (args.length >= 3 && (args[0].equalsIgnoreCase("Create") || args[0].equalsIgnoreCase("C")))
+			if ((args.length >= 3) && (args[0].equalsIgnoreCase("Create") || args[0].equalsIgnoreCase("C")))
 			{
 				String portal = args[1];
 				if (this.portalHandler.getPortal(portal) != null)
@@ -108,7 +105,7 @@ public class FancyPortals extends JavaPlugin {
 
 			}
 			else
-				if (args.length == 2 && (args[0].equalsIgnoreCase("Remove") || args[0].equalsIgnoreCase("R")))
+				if ((args.length == 2) && (args[0].equalsIgnoreCase("Remove") || args[0].equalsIgnoreCase("R")))
 				{
 					if (this.portalHandler.getPortal(args[1]) != null)
 					{
@@ -121,7 +118,7 @@ public class FancyPortals extends JavaPlugin {
 
 				}
 				else
-					if (args.length == 1 && (args[0].equalsIgnoreCase("List") || args[0].equalsIgnoreCase("L")))
+					if ((args.length == 1) && (args[0].equalsIgnoreCase("List") || args[0].equalsIgnoreCase("L")))
 					{
 						int i = 1;
 						sender.sendMessage("");
@@ -134,7 +131,7 @@ public class FancyPortals extends JavaPlugin {
 
 					}
 					else
-						if (args.length == 2 && (args[0].equalsIgnoreCase("Info") || args[0].equalsIgnoreCase("I")))
+						if ((args.length == 2) && (args[0].equalsIgnoreCase("Info") || args[0].equalsIgnoreCase("I")))
 						{
 							String portalName = args[1];
 							if (this.portalHandler.getPortal(portalName) == null)
@@ -190,15 +187,18 @@ public class FancyPortals extends JavaPlugin {
 		return true;
 	}
 
-	public PortalHandler getPortalHandler() {
-		return this.portalHandler;
+	@Override
+	public void onDisable() {
 	}
 
-	public FileManager getFileManager() {
-		return this.fileManager;
-	}
+	@Override
+	public void onEnable() {
+		this.logger = getLogger();
+		this.fileManager = new FileManager(this);
+		this.portalHandler = new PortalHandler(this, this.fileManager, this.logger);
+		// Register the event listener
+		getServer().getPluginManager().registerEvents(new Listeners(this, this.portalHandler), this);
 
-	public Logger getConsoleLogger() {
-		return this.logger;
+		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 	}
 }
