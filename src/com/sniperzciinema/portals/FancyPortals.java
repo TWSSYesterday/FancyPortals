@@ -164,7 +164,7 @@ public class FancyPortals extends JavaPlugin {
 											if (portal.getType() == PortalType.SERVER_COMMAND)
 												sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Server Command: " + ChatColor.WHITE + portal.getCommand());
 								sender.sendMessage("");
-								new FancyMessage("                 §7§l[§4§nRemove Portal§7§l]").tooltip("§aClick to suggest §cremoving§a this arena.").suggest("/FP Remove " + portal.getName()).send(p);
+								new FancyMessage("                 §7§l[§4§nRemove Portal§7§l]").tooltip("§aClick to suggest §cremoving§a this portal.").suggest("/FP Remove " + portal.getName()).send(p);
 								sender.sendMessage("");
 							}
 						}
