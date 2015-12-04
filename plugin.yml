@@ -1,0 +1,26 @@
+name: FancyPortals
+main: me.bimmr.fancyportals.FancyPortals
+authors: [recon88, TWSSYesterday]
+version: 0.0.9
+description: Portals!
+commands:
+  FancyPortals:
+    description: FancyPortals default command
+    usage: /<command>
+    aliases: [fp, portal, portals, fportal, fportals, fancyp, fancyportal]
+    
+permissions:  
+  FancyPortals.*:
+    default: true
+    children:
+      FancyPortals.Create: true
+      FancyPortals.Remove: true
+      FancyPortals.Use: true
+      
+  FancyPortals.Create:
+    default: true
+    children:
+      FancyPortals.Remove: true
+      
+  FancyPortals.Use:
+    default: true
