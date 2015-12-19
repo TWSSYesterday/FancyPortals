@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 public class BlockCrawler {
-	public static final int[][] ADJ_LOC = { { -1 }, { 1 }, { 0, -1 }, { 0, 1 }, { 0, 0, -1 }, { 0, 0, 1 } };
+	public static final int[][] ADJ_LOC = { { -1, 0, 0 }, { 1, 0, 0 }, { 0, -1, 0 }, { 0, 1, 0 }, { 0, 0, -1 }, { 0, 0, 1 } };
 	public static final int DEFAULT_MAX_SIZE = 1000;
 	int mMaxPortalSize;
 	Block mOrigBlock;
