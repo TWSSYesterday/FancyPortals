@@ -1,7 +1,7 @@
 name: FancyPortals
 main: me.bimmr.fancyportals.FancyPortals
 authors: [recon88, TWSSYesterday]
-version: 0.0.9
+version: 0.1.0
 description: Portals!
 commands:
   FancyPortals:
